@@ -6,12 +6,20 @@ public class PlayerController : MonoBehaviour {
 
 	public float moveSpeed = 7f; //Movement speed
 	public float jumpForce = 5f; // Jump force
+	public Transform startPosition;
+	public float fallThreshold = -10f; // The height at which the player respawns
 	private Rigidbody rb;
 	private bool isGrounded;
 
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();	
+		rb = GetComponent<Rigidbody>();
+
+		if (startPosition == null)
+		{
+			startPosition = new GameObject("StartPosition").transform;
+			startPosition.position = transform.position;
+		}
 	}
 	
 	// Update is called once per frame
@@ -30,6 +38,18 @@ public class PlayerController : MonoBehaviour {
 			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 			isGrounded = false;
 		}
+
+		// Check if player fell off
+		if (transform.position.y < fallThreshold)
+		{
+			Respawn();
+		}
+	}
+
+	void Respawn() {
+		// Reset player position
+		transform.position = startPosition.position + new Vector3(0, 10, 0); // Respwan above starting position
+		rb.velocity = Vector3.zero; // Reset movement velocity
 	}
 
 	// Detect when player lands
