@@ -5,12 +5,13 @@ public class Timer : MonoBehaviour
 {
     public Text TimerText;
     private float elapsedTime = 0f;
-    private bool isRunning = false;
+    public bool isRunning { get; private set; }
 
     void Update()
     {
         if (isRunning)
         {
+            Debug.Log("Timer is running");
             elapsedTime += Time.deltaTime;
             UpdateTimerText();
         }
@@ -26,6 +27,12 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
+        Debug.Log("Timer started");
         isRunning = true;
+    }
+
+    public void StopTimer()
+    {
+        isRunning = false; // Stop the timer
     }
 }

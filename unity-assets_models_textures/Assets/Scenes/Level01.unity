@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 617d9be015db68348a623b01ea51a8c5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.47928476, g: 0.79923165, b: 0.90054613, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 68091255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 2, z: 132.51}
+  m_LocalPosition: {x: -0.6, y: 1.12, z: 132.51}
   m_LocalScale: {x: 16.391996, y: 0.58124983, z: 16.599586}
   m_Children: []
   m_Father: {fileID: 879358534}
@@ -643,7 +643,7 @@ Prefab:
     - target: {fileID: 224390869441358542, guid: 9fa5e04d61cf85946a4aa67354a6e2e9,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224390869441358542, guid: 9fa5e04d61cf85946a4aa67354a6e2e9,
         type: 2}
@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 393377055}
   - component: {fileID: 393377054}
   - component: {fileID: 393377053}
+  - component: {fileID: 393377058}
   m_Layer: 0
   m_Name: WinFlag
   m_TagString: Untagged
@@ -866,12 +867,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 393377052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84, y: 5.73, z: 134.26}
+  m_LocalPosition: {x: -0.84, y: 4.8, z: 131.9}
   m_LocalScale: {x: 0.624999, y: 3.4704638, z: 0.48682645}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393377058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 393377052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d881e7a73e7735047bc9d5667a131263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1152294387}
+  timerText: {fileID: 1378735130}
 --- !u!1 &435347705
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,10 +993,10 @@ Transform:
   m_GameObject: {fileID: 508083652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.25, z: -5.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.140618, y: 1, z: 20.297136}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &578487317
 GameObject:
@@ -1663,7 +1677,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1152294382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,7 +1938,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1353236430
 GameObject:
@@ -2016,11 +2030,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1353236430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
-  m_LocalScale: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: -4.79}
+  m_LocalScale: {x: 16.487486, y: 2, z: 0.049999196}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1364243302
 GameObject:
@@ -3414,6 +3428,16 @@ Prefab:
     - target: {fileID: 1337188752086072, guid: d96203f0ce4fac940a763807e001ff43, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 136501191420873048, guid: d96203f0ce4fac940a763807e001ff43,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136501191420873048, guid: d96203f0ce4fac940a763807e001ff43,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d96203f0ce4fac940a763807e001ff43, type: 2}
