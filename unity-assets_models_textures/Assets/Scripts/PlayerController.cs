@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed = 7f; //Movement speed
+	public float moveSpeed = 5f; //Movement speed
 	public float jumpForce = 5f; // Jump force
 	public Transform startPosition;
 	public float fallThreshold = -10f; // The height at which the player respawns
