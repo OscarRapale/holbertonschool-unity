@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 	void Respawn() {
 		// Reset player position
 		transform.position = startPosition.position + new Vector3(0, 10, 0); // Respwan above starting position
-		rb.velocity = Vector3.zero; // Reset movement velocity
+		rb.linearVelocity = Vector3.zero; // Reset movement velocity
 	}
 
 	// Detect when player lands
