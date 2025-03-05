@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void LevelSelect(int level)
     {
-        string sceneName = "Level0" + level;  // Example: Level01, Level02, Level03
+        string sceneName = "Level0" + level;
         SceneManager.LoadScene(sceneName);
     }
 
@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Exited");  // Prints to console
+        Debug.Log("Exited");
         Application.Quit();
     }
 }
