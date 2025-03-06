@@ -1,16 +1,40 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public void Back()
+    public Toggle invertYToggle; // Assign this in the Inspector
+    private bool previousInvertYState;
+    private string previousScene;
+
+    void Start()
     {
-        Debug.Log("Back button clicked");
-        SceneManager.LoadScene("MainMenu");
+        // Save the previous scene so we can return to it
+        previousScene = PlayerPrefs.GetString("PreviousScene", "MainMenu");
+
+        // Load the stored preference
+        bool isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
+        invertYToggle.isOn = isInverted;
+
+        // Store previous state in case the player presses Back
+        previousInvertYState = isInverted;
     }
 
-    private void Start()
+    public void Apply()
     {
-        PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
+        // Save the new setting
+        PlayerPrefs.SetInt("InvertY", invertYToggle.isOn ? 1 : 0);
+        PlayerPrefs.Save();
+
+        // Load the previous scene
+        SceneManager.LoadScene(previousScene);
+    }
+
+    public void Back()
+    {
+        // Restore previous state and return without saving changes
+        invertYToggle.isOn = previousInvertYState;
+        SceneManager.LoadScene(previousScene);
     }
 }
