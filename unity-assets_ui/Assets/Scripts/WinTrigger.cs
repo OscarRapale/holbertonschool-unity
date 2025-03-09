@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class WinTrigger : MonoBehaviour {
 
-	public Timer timer;
-	public Text timerText;
+    public Timer timer;
+    public Text timerText;
+    public GameObject winCanvas; // Reference to WinCanvas
 
-	private void OnTriggerEnter(Collider other)
-	{
-		Debug.Log("Player reached WinFlag!");
-		if (other.CompareTag("Player")) // Check if player touches WinFlag
-		{
-			timer.StopTimer(); //Stop timer
-		
-			// Change properties
-			timerText.fontSize = 60;
-			timerText.color = Color.green;
-		}
-	}
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player reached WinFlag!");
+        if (other.CompareTag("Player")) // Check if player touches WinFlag
+        {
+            timer.StopTimer(); // Stop the timer
+            timer.Win(); // Update final time in WinCanvas
+
+            // Activate the win screen
+            winCanvas.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 }

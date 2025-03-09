@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
     public Text TimerText;
     private float elapsedTime = 0f;
+    public TextMeshProUGUI finalTimeText; // Store the reference to FinalTime
     public bool isRunning { get; private set; }
 
     void Update()
     {
         if (isRunning)
         {
-            Debug.Log("Timer is running");
             elapsedTime += Time.deltaTime;
             UpdateTimerText();
         }
@@ -27,12 +28,19 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
-        Debug.Log("Timer started");
         isRunning = true;
     }
 
     public void StopTimer()
     {
-        isRunning = false; // Stop the timer
+        isRunning = false;
+    }
+
+    public void Win() // This will display the time on WinCanvas
+    {
+        if (!isRunning)
+        {
+            finalTimeText.text = TimerText.text;
+        }
     }
 }
