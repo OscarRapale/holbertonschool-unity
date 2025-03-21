@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public Toggle invertYToggle; // Assign this in the Inspector
+    public Toggle invertYToggle;
     private bool previousInvertYState;
     private string previousScene;
 
