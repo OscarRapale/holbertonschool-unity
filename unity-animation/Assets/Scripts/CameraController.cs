@@ -17,30 +17,34 @@ public class CameraController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-		// Load the stored inversion setting
-		isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
+        // Load the stored inversion setting
+        isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
 
-		transform.position = player.position + offset;
+        transform.position = player.position + offset;
+        transform.LookAt(player.position); // Make sure camera starts looking at the player
     }
     
     void LateUpdate() {
         if (player == null) return;
 
+        // Follow the player's position but do not inherit rotation
         transform.position = player.position + offset;
 
         bool shouldRotate = !requireRightClick || Input.GetMouseButton(1);
         if (shouldRotate) {
             yaw += Input.GetAxis("Mouse X") * rotationSpeed;
-            
+
             float mouseY = Input.GetAxis("Mouse Y");
             pitch += (isInverted ? mouseY : -mouseY) * rotationSpeed; // Apply inversion
             pitch = Mathf.Clamp(pitch, -30f, 60f);
 
+            // Only apply rotation to the camera itself, not the player
             transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
         }
     }
 
     public void ResetCameraPosition() {
         transform.position = player.position + offset;
+        transform.LookAt(player.position);
     }
 }
