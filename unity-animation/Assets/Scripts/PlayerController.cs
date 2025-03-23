@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private bool isGrounded;
+    private bool isJumping;
+    private Animator animator;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
 
         if (startPosition == null)
         {
@@ -40,6 +43,18 @@ public class PlayerController : MonoBehaviour {
 
             // Move the player using Rigidbody for better physics interaction
             rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
+
+            // Play Running animation if grounded
+            if (isGrounded)
+            {
+                animator.SetBool("isRunning", true);
+                animator.Play("Running");
+            }
+        }
+        else if (isGrounded)
+        {
+            // Play Idle animation
+            animator.SetBool("isRunning", false);
         }
 
         // Jump
@@ -47,6 +62,9 @@ public class PlayerController : MonoBehaviour {
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+            isJumping = true;
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isRunning", false);
         }
 
         // Check if player fell off
@@ -59,7 +77,7 @@ public class PlayerController : MonoBehaviour {
     void Respawn() {
         // Reset player position
         transform.position = startPosition.position + new Vector3(0, 10, 0); // Respawn above starting position
-        rb.linearVelocity = Vector3.zero; // Reset movement velocity
+        rb.velocity = Vector3.zero; // Reset movement velocity
     }
 
     // Detect when player lands
@@ -68,6 +86,18 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            isJumping = false;
+            animator.SetBool("isJumping", false);
+
+            // Determine if we return to Running or Idle
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                animator.SetBool("isRunning", true);
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
         }
     }
 }
