@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     private bool isGrounded;
     private bool isJumping;
+    private bool isFalling;
     private Animator animator;
 
     // Use this for initialization
@@ -63,8 +64,21 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
             isJumping = true;
+            isFalling = false;
             animator.SetBool("isJumping", true);
             animator.SetBool("isRunning", false);
+            animator.SetBool("isFalling", false);
+        }
+
+        // Detect if player is falling (when not grounded and moving downward)
+        if (!isGrounded && !isFalling && rb.velocity.y < -7f) {
+            isFalling = true;
+            isJumping = false;
+            animator.SetBool("isFalling", true);
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isRunning", false);
+            Debug.Log("Player is falling");
+
         }
 
         // Check if player fell off
@@ -85,9 +99,22 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            if (isFalling)
+            {
+                // Trigger Falling Flat Impact animation
+                animator.SetBool("isFalling", false);
+                animator.Play("Falling Flat Impact");
+                Debug.Log("impact");
+
+                // Trigger Getting Up animation after Falling Flat Impact
+                StartCoroutine(TriggerGettingUp());
+            }
+
             isGrounded = true;
             isJumping = false;
+            isFalling = false;
             animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
 
             // Determine if we return to Running or Idle
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -99,5 +126,16 @@ public class PlayerController : MonoBehaviour {
                 animator.SetBool("isRunning", false);
             }
         }
+    }
+
+    // Trigger Getting Up animation after Falling Flat Impact
+    private IEnumerator TriggerGettingUp()
+    {
+        yield return new WaitForSeconds(1.0f); // Adjust this delay to match the length of the Falling Flat Impact animation
+        animator.SetBool("isGettingUp", true);
+
+        // Wait for the Getting Up animation to finish
+        yield return new WaitForSeconds(1.0f); // Adjust this delay to match the length of the Getting Up animation
+        animator.SetBool("isGettingUp", false);
     }
 }
