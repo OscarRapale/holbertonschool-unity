@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d881e7a73e7735047bc9d5667a131263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 0}
+  timer: {fileID: 1828343959}
   timerText: {fileID: 608563663}
   winCanvas: {fileID: 572924878}
 --- !u!23 &581382524
@@ -4727,6 +4727,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91fd9eb361101624584d455423a494ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1828343959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8236086531833388049, guid: d96203f0ce4fac940a763807e001ff43, type: 3}
+  m_PrefabInstance: {fileID: 2094949582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4cfaf9089afce47ba49fcdb840ade7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1867416419
