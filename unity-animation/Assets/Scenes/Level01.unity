@@ -6363,6 +6363,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 681776878254997004, guid: d96203f0ce4fac940a763807e001ff43, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 681776878254997004, guid: d96203f0ce4fac940a763807e001ff43, type: 3}
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 508083653}
