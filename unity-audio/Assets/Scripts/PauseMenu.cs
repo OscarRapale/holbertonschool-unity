@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseCanvas; // Assign PauseCanvas in the Inspector
+    public GameObject pauseCanvas;
+    public AudioMixer masterMixer; // Add reference to your AudioMixer
+    public AudioMixerSnapshot normalSnapshot; // Normal game audio
+    public AudioMixerSnapshot muffledSnapshot; // Paused/muffled audio
     private bool isPaused = false;
 
     void Update()
@@ -27,16 +31,21 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f; // Pause game time
         isPaused = true;
 
+        // Transition to muffled audio
+        muffledSnapshot.TransitionTo(0.01f);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void Resume()
     {
-        Debug.Log("Resume button clicked!");
         pauseCanvas.SetActive(false);
         Time.timeScale = 1f; // Resume game time
         isPaused = false;
+
+        // Transition back to normal audio
+        normalSnapshot.TransitionTo(0.1f);
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -1,8 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour {
+
+    [Header("Audio")]
+    public AudioClip footstepsSound;
+    public AudioClip landingSound;
+    public AudioMixerGroup runningMixerGroup;
+    public AudioMixerGroup landingMixerGroup;
+    private AudioSource footstepsAudioSource;
+    private AudioSource landingAudioSource;
 
     public float moveSpeed = 7f; // Movement speed
     public float jumpForce = 6f; // Jump force
@@ -25,6 +34,18 @@ public class PlayerController : MonoBehaviour {
             startPosition = new GameObject("StartPosition").transform;
             startPosition.position = transform.position;
         }
+
+        footstepsAudioSource = gameObject.AddComponent<AudioSource>();
+        footstepsAudioSource.playOnAwake = false;
+        footstepsAudioSource.loop = true;
+        footstepsAudioSource.outputAudioMixerGroup = runningMixerGroup;
+        footstepsAudioSource.clip = footstepsSound;
+
+        landingAudioSource = gameObject.AddComponent<AudioSource>();
+        landingAudioSource.playOnAwake = false;
+        landingAudioSource.loop = false;
+        landingAudioSource.outputAudioMixerGroup = landingMixerGroup;
+        landingAudioSource.clip = landingSound;
     }
     
     // Update is called once per frame
@@ -50,12 +71,23 @@ public class PlayerController : MonoBehaviour {
             {
                 animator.SetBool("isRunning", true);
                 animator.Play("Running");
+                if (!footstepsAudioSource.isPlaying)
+                {
+                    footstepsAudioSource.Play();
+                }
+            }
+            else
+            {
+                footstepsAudioSource.Stop();
             }
         }
-        else if (isGrounded)
+        else 
         {
-            // Play Idle animation
-            animator.SetBool("isRunning", false);
+            footstepsAudioSource.Stop();
+            if (isGrounded)
+            {
+                animator.SetBool("isRunning", false);
+            }
         }
 
         // Jump
@@ -104,7 +136,13 @@ public class PlayerController : MonoBehaviour {
                 // Trigger Falling Flat Impact animation
                 animator.SetBool("isFalling", false);
                 animator.Play("Falling Flat Impact");
-                Debug.Log("impact");
+                footstepsAudioSource.Stop();
+
+                // Play landing sound
+                if (landingAudioSource != null && landingAudioSource.clip != null)
+                {
+                    landingAudioSource.Play();
+                }
 
                 // Trigger Getting Up animation after Falling Flat Impact
                 StartCoroutine(TriggerGettingUp());

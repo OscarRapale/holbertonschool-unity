@@ -3,6 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    private void Start()
+    {
+        BackgroundMusic bgm = FindObjectOfType<BackgroundMusic>();
+        if (bgm != null)
+        {
+            bgm.StopMusic();
+        }
+    }
     public void LevelSelect(int level)
     {
         string sceneName = "Level0" + level;
